@@ -1,0 +1,49 @@
+[alias]
+	st = status
+	sts = status -s
+	lgf = log --format='%C(auto)%h%d %s (%Cblue%ae%Creset)' --graph
+	co = checkout
+	br = !git --no-pager branch
+	last = !git log -1
+	ci = commit
+	difw = diff -U0 --word-diff-regex=.
+	dif = diff -U0 --color-words=.
+[user]
+	email = <bilou@bilou>
+	name = <bilou>
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[push]
+	default = current
+[remote "origin"]
+	prune = true
+[rerere]
+	enabled = true
+[core]
+	pager = diff-so-fancy | less --tabs=4 -RFX
+[color]
+	ui = true
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+[color "diff"]
+	meta = yellow
+	frag = magenta bold
+	commit = yellow bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+[diff-so-fancy]
+	markEmptyLines = false
+	changeHunkIndicators = false
+	stripLeadingSymbols = false
+	rulerWidth = 47
+[status]
+	showuntrackedfiles = all
+[diff]
+	noprefix = true
