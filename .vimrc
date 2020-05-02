@@ -1,8 +1,3 @@
-" * ctags needs to get installed
-" and then put ctags bash file into .git/hooks
-" """"""""""""""""""""""""""""""""""""""""""""
-" * ripgrep needs to be installed too to boost ctrlp.vim performances
-
 call plug#begin('~/nvim/plugged')
 Plug 'tpope/vim-fugitive'
 Plug 'evidens/vim-twig'
@@ -21,12 +16,8 @@ Plug 'tpope/vim-unimpaired'
 Plug 'amiorin/vim-project'
 Plug 'mhinz/vim-startify' " php project management but quite complicated
 Plug 'StanAngeloff/php.vim' " php syntax but complicated
-Plug 'ncm2/ncm2' " complicated a bit
-Plug 'roxma/nvim-yarp' " complicated a bit
-Plug 'ncm2/ncm2-bufword' " complicated a bit
-Plug 'ncm2/ncm2-path' " complicated a bit
 Plug 'phpactor/phpactor', {'for': 'php', 'do': 'composer install --no-dev -o'}
-Plug 'phpactor/ncm2-phpactor'
+Plug 'elythyr/phpactor-mappings'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'wincent/ferret'
@@ -38,6 +29,8 @@ Plug 'honza/vim-snippets'
 Plug 'majutsushi/tagbar'
 Plug 'vim-vdebug/vdebug' " Project path needs to be specified https://bit.ly/35ll1N1
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'bilougit/phpunit.vim'
+Plug 'ryanoasis/vim-devicons' " Should be loaded last
 call plug#end()
 
 " Plugins configurations
@@ -50,32 +43,6 @@ nmap nt :NERDTreeToggle<CR>
 nmap nf :NERDTreeFind<CR>
 " How can I close vim if the only window left open is a NERDTree?
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-" File highlighting
-function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
- exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
- exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
-endfunction
-
-" Color files based on their extensions
-call NERDTreeHighlightFile('feature', 'red', 'none', 'red', '#151515')
-call NERDTreeHighlightFile('ini', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('txt', 'blue', 'none', '#3366FF', '#151515')
-call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', '#151515')
-call NERDTreeHighlightFile('rst', 'blue', 'none', '#3366FF', '#151515')
-call NERDTreeHighlightFile('yml', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('yaml', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('sh', 'green', 'none', 'green', '#151515')
-call NERDTreeHighlightFile('bash', 'green', 'none', 'green', '#151515')
-call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('neon', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('xml', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
-call NERDTreeHighlightFile('scss', 'cyan', 'none', 'cyan', '#151515')
-call NERDTreeHighlightFile('sql', 'cyan', 'none', 'cyan', '#151515')
-call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
-call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
 
 " Lightline.vim
 " """""""""""""
@@ -112,8 +79,8 @@ set laststatus=2
 set completeopt=noinsert,menuone,noselect
 
 " phpactor/ncm2-phpactor
-autocmd BufEnter * call ncm2#enable_for_buffer()
-set completeopt=noinsert,menuone,noselect
+" autocmd BufEnter * call ncm2#enable_for_buffer()
+" set completeopt=noinsert,menuone,noselect
 
 " ripgrep
 nnoremap <leader>a :Rg<space>
@@ -184,7 +151,7 @@ nmap <leader>bm :CtrlPMixed<cr>
 nmap <leader>bs :CtrlPMRU<cr>
 
 " ctrlp.vim with ctags
-nnoremap <C-o> :CtrlPTag<CR>
+nnoremap <leader-o> :CtrlPTag<CR>
 
 " vim-unimpaired
 nmap ( [
@@ -193,6 +160,14 @@ omap ( [
 omap ) ]
 xmap ( [
 xmap ) ]
+
+" vim-devicons 
+set encoding=UTF-8
+
+" phpunit.vim
+let g:php_bin = 'docker-compose exec -T -u root php php'
+let g:phpunit_bin = 'vendor/bin/phpunit'
+let g:phpunit_testroot = 'tests/unit'
 
 """""""""""""""""""""""""""""""""""""""""""
 
@@ -222,9 +197,6 @@ set undodir=~/.vim/undo//
 
 " Highlight search
 set hls
-
-" Copy to clipboard
-" -> "+y
 
 " Switch leader from \ to space
 let mapleader = ","
