@@ -15,6 +15,7 @@ ctags --tag-relative=yes -R -f "$dir/$$.tags" \
     --exclude=vendor/bin \
     --exclude=vendor/friendsofphp/php-cs-fixer \
     --exclude=vendor/phpstan \
+    --exclude=var \
     --exclude=vendor/vimeo \
     --exclude=vendor/infection \
     --exclude=vendor/slam/phpstan-extensions \
