@@ -18,8 +18,16 @@ Plug 'mhinz/vim-startify' " php project management but quite complicated
 Plug 'StanAngeloff/php.vim' " php syntax but complicated
 Plug 'phpactor/phpactor', {'for': 'php', 'do': 'composer install --no-dev -o'}
 Plug 'elythyr/phpactor-mappings'
+
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+
+" Manage tags files (for ctags) ?
+Plug 'ludovicchabant/vim-gutentags'
+
+" Basic autocomplete
+Plug 'shawncplus/phpcomplete.vim'
+
 Plug 'wincent/ferret'
 Plug 'neomake/neomake'
 Plug 'adoy/vim-php-refactoring-toolbox' " shortcuts don't work yet
@@ -32,6 +40,50 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'bilougit/phpunit.vim'
 Plug 'ryanoasis/vim-devicons' " Should be loaded last
 call plug#end()
+
+"""""""""""""""""""""""""""""""""""""""""""
+
+" General setup
+
+if !has('gui_running')
+  set t_Co=256
+endif
+
+" My own config
+" """""""""""""
+syntax on
+" show existing tab with 4 spaces width
+set tabstop=4
+
+" soft tab width
+set softtabstop=4
+set shiftwidth=4
+
+" 4 spaces tab
+set expandtab
+
+set autoindent
+
+" numbered lines
+set nu
+
+set colorcolumn=80,120
+
+" backup vim
+set backupdir=~/.vim/backup//
+set directory=~/.vim/swap//
+set undodir=~/.vim/undo//
+
+" Highlight search
+set hls
+
+" Switch leader from \ to space
+let mapleader = ","
+
+" reload files when they change on disk (e.g., git checkout)
+set autoread
+
+""""""""""""""""""""""""""""""""""""""""""
 
 " Plugins configurations
 " """"""""""""""""""""""
@@ -55,6 +107,7 @@ set laststatus=2
 " gc4j to comment the current and four lines below
 
 " tpope/vim-abolish
+" """"""""""""""
 " feat1
 " :%Subvert/facilit{y,ies}/building{,s}/g  does the same as the three lines below
 " :%s/facilities/buildings/g
@@ -74,6 +127,7 @@ set laststatus=2
 " dot.case (cr.),
 " space case (cr<space>),
 " and Title Case (crt) are all just 3 keystrokes away.
+" """"""""""""""
 
 " IMPORTANT: :help Ncm2PopupOpen for more information
 set completeopt=noinsert,menuone,noselect
@@ -124,7 +178,10 @@ nmap <F8> :TagbarToggle<CR>
 " generated file can be under .git folder too
 set tags+=.git/tags
 " Generates php ctags on save
-au BufWritePost *.php silent! !eval '[ -f ".git/hooks/ctags" ] && .git/hooks/ctags' &
+" au BufWritePost *.php silent! !eval '[ -f ".git/hooks/ctags" ] && .git/hooks/ctags' &
+
+" ctrlp.vim with ctags
+nnoremap <leader-o> :CtrlPTag<CR>
 
 " ctrlp.vim
 " """""""""
@@ -132,10 +189,13 @@ au BufWritePost *.php silent! !eval '[ -f ".git/hooks/ctags" ] && .git/hooks/cta
 " of the setups below are working.
 "
 " Setup some default ignores
+  "\ 'file': '\v\.(exe|so|dll|class|png|jpg|jpeg)$',
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/](\.(git|hg|svn)|\_site)$',
-  \ 'file': '\v\.(exe|so|dll|class|png|jpg|jpeg)$',
+  \ 'file': '\v(\.(exe|so|dll|class|png|jpg|jpeg)|c?tags(\.(temp|lock))?)$',
 \}
+
+let g:ctrlp_user_command = 'find %s -type f'
 
 " Use the nearest .git directory as the cwd
 " This makes a lot of sense if you are working on a project that is in version
@@ -149,9 +209,8 @@ nmap <leader>p :CtrlP<cr>
 nmap <leader>bb :CtrlPBuffer<cr>
 nmap <leader>bm :CtrlPMixed<cr>
 nmap <leader>bs :CtrlPMRU<cr>
-
-" ctrlp.vim with ctags
-nnoremap <leader-o> :CtrlPTag<CR>
+" If a file is already open, open it again in a new pane instead of switching to the existing pane
+let g:ctrlp_switch_buffer = 'et'
 
 " vim-unimpaired
 nmap ( [
@@ -168,35 +227,3 @@ set encoding=UTF-8
 let g:php_bin = 'docker-compose exec -T -u root php php'
 let g:phpunit_bin = 'vendor/bin/phpunit'
 let g:phpunit_testroot = 'tests/unit'
-
-"""""""""""""""""""""""""""""""""""""""""""
-
-if !has('gui_running')
-  set t_Co=256
-endif
-
-" My own config
-" """""""""""""
-" show existing tab with 4 spaces width
-set tabstop=4
-
-" soft tab width
-set softtabstop=4
-set shiftwidth=4
-
-" 4 spaces tab
-set expandtab
-
-" numbered lines
-set nu
-
-" backup vim
-set backupdir=~/.vim/backup//
-set directory=~/.vim/swap//
-set undodir=~/.vim/undo//
-
-" Highlight search
-set hls
-
-" Switch leader from \ to space
-let mapleader = ","
