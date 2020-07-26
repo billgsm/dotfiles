@@ -6,7 +6,13 @@ Plug 'sheerun/vim-polyglot'
 Plug 'trevordmiller/nova-vim'
 Plug 'pearofducks/ansible-vim'
 Plug 'preservim/nerdtree'
-Plug 'bfredl/nvim-miniyank'
+" Slows down vim 😥
+" Plug 'Xuyuanp/nerdtree-git-plugin'
+" """"""""""""""""""""""""""""""""""
+" """"""""""""""""""""""""""""""""""
+" Erreur détectée en traitant function miniyank#on_yank[14]..miniyank#write :
+" Retry to install this later
+" Plug 'bfredl/nvim-miniyank'
 Plug 'moll/vim-bbye'
 Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-commentary'
@@ -83,6 +89,13 @@ let mapleader = ","
 " reload files when they change on disk (e.g., git checkout)
 set autoread
 
+" Replace the word under the cursor
+" Open a new command to complete with the word to substitute with
+" Example:
+" The cursor is on the word "foo".
+" Hitting <leader>s will open ":%s/foo/"
+:nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
+
 """"""""""""""""""""""""""""""""""""""""""
 
 " Plugins configurations
@@ -91,8 +104,8 @@ set autoread
 " NERDTree
 " """"""""
 " How can I map a specific key or shortcut to open NERDTree?
-nmap nt :NERDTreeToggle<CR>
-nmap nf :NERDTreeFind<CR>
+nmap <leader>t :NERDTreeToggle<CR>
+nmap <leader>f :NERDTreeFind<CR>
 " How can I close vim if the only window left open is a NERDTree?
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
@@ -140,9 +153,10 @@ set completeopt=noinsert,menuone,noselect
 nnoremap <leader>a :Rg<space>
 nnoremap <leader>A :exec "Rg ".expand("<cword>")<cr>
 
+  " \   'rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1,
 autocmd VimEnter * command! -nargs=* Rg
   \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1,
+  \   'rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --glob "!tags*" --glob "!*.xml" --glob "!*.cache" --glob "!infection/*" --color "always" '.shellescape(<q-args>), 1,
   \   <bang>0 ? fzf#vim#with_preview('up:60%')
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
