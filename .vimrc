@@ -19,6 +19,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-surround'
 Plug 'amiorin/vim-project'
 Plug 'mhinz/vim-startify' " php project management but quite complicated
 Plug 'StanAngeloff/php.vim' " php syntax but complicated
@@ -45,6 +46,12 @@ Plug 'vim-vdebug/vdebug' " Project path needs to be specified https://bit.ly/35l
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'bilougit/phpunit.vim'
 Plug 'ryanoasis/vim-devicons' " Should be loaded last
+
+" Nice plugins
+""""""""""""""
+
+Plug 'editorconfig/editorconfig-vim'
+Plug 'terryma/vim-multiple-cursors'
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""
