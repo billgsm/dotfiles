@@ -248,3 +248,21 @@ set encoding=UTF-8
 let g:php_bin = 'docker-compose exec -T -u root php php'
 let g:phpunit_bin = 'vendor/bin/phpunit'
 let g:phpunit_testroot = 'tests/unit'
+
+" Personal
+" """"""""
+" Welcoming message
+echo "(>^.^<)"
+echo "(>^.^<)"
+echo "(>^.^<)"
+
+" Editing and sourcing $MYVIMRC fast
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>G
+nnoremap <leader>sv :source $MYVIMRC<cr>
+
+inoremap jk <esc>
+
+" Some php abbreviations
+iabbrev cls class
+iabbrev impl implements
+iabbrev rfoundation Symfony\Component\HttpFoundation\
