@@ -273,6 +273,7 @@ echo "\" ctags moment"
 echo "ctags -R . \" this will generate tags"
 echo "<C-$> will go to the definition of the word you're on"
 echo "<C-t> will go back to the previous tag you were on"
+echo "\"vip\" will select the paragraph the cursor is in"
 
 " echo "                                                                                                                                                                                      dddddddd"
 " echo "EEEEEEEEEEEEEEEEEEEEEE                   jjjj                                                   &&&&&&&&&&                 GGGGGGGGGGGGG                                              d::::::d"
