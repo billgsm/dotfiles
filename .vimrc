@@ -328,3 +328,16 @@ inoremap jk <esc>
 iabbrev cls class
 iabbrev impl implements
 iabbrev rfoundation Symfony\Component\HttpFoundation\
+
+" Experimental
+" ------------
+"
+" Basic scratch
+"
+"simple mapping
+"--------------
+" This works :)
+nnoremap <leader>scr :call Scratch()<cr>
+
+" Enable project specific vimrc
+set exrc
