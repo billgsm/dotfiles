@@ -22,9 +22,12 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-surround'
 Plug 'amiorin/vim-project'
 Plug 'mhinz/vim-startify' " php project management but quite complicated
-Plug 'StanAngeloff/php.vim' " php syntax but complicated
+"Plug 'StanAngeloff/php.vim' " php syntax but complicated
 Plug 'phpactor/phpactor', {'for': 'php', 'do': 'composer install --no-dev -o'}
 Plug 'elythyr/phpactor-mappings'
+
+" Syntax highlighter
+Plug 'vim-syntastic/syntastic'
 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -44,14 +47,19 @@ Plug 'honza/vim-snippets'
 Plug 'majutsushi/tagbar'
 Plug 'vim-vdebug/vdebug' " Project path needs to be specified https://bit.ly/35ll1N1
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'bilougit/phpunit.vim'
 Plug 'ryanoasis/vim-devicons' " Should be loaded last
 
 " Nice plugins
 """"""""""""""
 
 Plug 'editorconfig/editorconfig-vim'
-Plug 'terryma/vim-multiple-cursors'
+
+" Markdown
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
+
+" Scratch
+Plug 'bilougit/basicscratch'
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""
@@ -78,7 +86,14 @@ set expandtab
 set autoindent
 
 " numbered lines
-set nu
+set relativenumber
+
+" add directories of ./ to path
+set path=.
+" set path+=**
+
+" Highlight current line
+set cursorline
 
 set colorcolumn=80,120
 
@@ -160,13 +175,17 @@ set completeopt=noinsert,menuone,noselect
 nnoremap <leader>a :Rg<space>
 nnoremap <leader>A :exec "Rg ".expand("<cword>")<cr>
 
+" fzf
   " \   'rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1,
 autocmd VimEnter * command! -nargs=* Rg
   \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --glob "!tags*" --glob "!*.xml" --glob "!*.cache" --glob "!infection/*" --color "always" '.shellescape(<q-args>), 1,
+  \   'rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --glob "!tags*" --glob "!*.xml" --glob "!*.cache" --glob "!tests/*" --glob "!infection/*" --color "always" '.shellescape(<q-args>), 1,
   \   <bang>0 ? fzf#vim#with_preview('up:60%')
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
+
+" let g:fzf_tags_command = 'ctags -R' " this is the default value
+" let g:fzf_tags_command = '.git/hooks/ctags'
 
 " neomake
 " When writing a buffer (no delay).
@@ -197,12 +216,13 @@ nmap <F8> :TagbarToggle<CR>
 " :tl or :tlast goes to the last tag of the list
 "
 " generated file can be under .git folder too
-set tags+=.git/tags
+" set tags+=.git/tags
 " Generates php ctags on save
 " au BufWritePost *.php silent! !eval '[ -f ".git/hooks/ctags" ] && .git/hooks/ctags' &
+set tags=tags
 
 " ctrlp.vim with ctags
-nnoremap <leader-o> :CtrlPTag<CR>
+nnoremap <leader>oo :CtrlPTag<CR>
 
 " ctrlp.vim
 " """""""""
@@ -251,10 +271,8 @@ let g:phpunit_testroot = 'tests/unit'
 
 " Personal
 " """"""""
+
 " Welcoming message
-echo "---------------------------------------------------------------------"
-echo "|                            Example tips                           |"
-echo "---------------------------------------------------------------------"
 echo "ysiw'           => surround the current word with simple quote"
 echo "da[             => same as di[ except it deletes bracket too"
 echo "dt<space>       => same as df<space> except it won't delete the space"
@@ -269,8 +287,11 @@ echo "\" Displays all matching files when we tab complete"
 echo ":set wildmenu"
 echo "\" Autocompletes any open buffer"
 echo ":b <some characters>"
-echo "g- and g+ to go through file changes along with u and CTRL-r"
-echo "\"vip\" will select the paragraph the cursor is in"                                                                                                                  "
+echo "\" ctags moment"
+echo "ctags -R . \" this will generate tags"
+echo "<C-$> will go to the definition of the word you're on"
+echo "<C-t> will go back to the previous tag you were on"
+echo "\"vip\" will select the paragraph the cursor is in"
 
 " Editing and sourcing $MYVIMRC fast
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>G
@@ -283,15 +304,135 @@ iabbrev cls class
 iabbrev impl implements
 iabbrev rfoundation Symfony\Component\HttpFoundation\
 
-" Experimental
-" ------------
-"
-" Basic scratch
-"
-"simple mapping
-"--------------
-" This works :)
-nnoremap <leader>scr :call Scratch()<cr>
+" {{{{{{{{{{{{{{{{{{{
+" Integrate fd command
+function! ExtractStringFromLine()
+endfunction
 
-" Enable project specific vimrc
-set exrc
+function! FastFindFile(filename)
+    let fd_result = system('! fd -i ' . a:filename . ' src')
+    let size = split(fd_result, '\v\n')
+
+    " Open a new split and set it up.
+    split __fd_result__
+    normal! ggdG
+    setlocal buftype=nofile
+    setlocal nowrap
+    setlocal norelativenumber
+    setlocal number
+    nnoremap <buffer> q :q<cr>
+    nnoremap <buffer> <silent> <cr> :execute 'tabnew '.getline('.')<cr>
+
+    " Insert the bytecode.
+    call append(0, size)
+
+    setlocal readonly
+    " Cannot work ever since you do many researches
+    " setlocal nomodifiable
+    normal! gg
+    resize 10
+endfunction
+
+nnoremap <leader>fd :call FastFindFile(expand('<cword>'))<cr>
+" }}}}}}}}}}}}}}}}}}}
+
+" {{{{{{{{{{{{{{{{{{{
+" Update selected composer package
+function! UpdateComposer(rawPackageName)
+    let packageName = substitute(a:rawPackageName, '"', '', 'g')
+    let packageName = split(trim(packageName), ':')[0]
+
+    execute '! docker-compose exec php composer u ' . packageName . ' -vvv'
+    " let bytecode = system('docker-compose exec php composer u ' . packageName . ' -vvv')
+endfunction
+
+nnoremap <leader>com :call UpdateComposer(getline('.'))<cr>
+" }}}}}}}}}}}}}}}}}}}
+
+" {{{{{{{{{{{{{{{{{{{
+" Update visual selected composer packages
+function! s:ExtractComposerLine(composerLine)
+    let packageName = substitute(a:composerLine, '"', '', 'g')
+    let packageName = split(trim(packageName), ':')[0]
+
+    return packageName
+endfunction
+
+function! VUpdateComposer(startNum, endNum)
+    let start = a:startNum[1]
+    let end = a:endNum[1]
+    let packages = []
+
+    while start < end
+        let truc = s:ExtractComposerLine(getline(start))
+        call add(packages, truc)
+
+        let start += 1
+    endwhile
+
+    echo 'Updating... ' . join(packages, ' ')
+    call UpdateComposer(join(packages, ' '))
+endfunction
+
+vnoremap <leader>vcom :<c-u>call VUpdateComposer(getpos("'<"), getpos("'>"))<cr>
+" }}}}}}}}}}}}}}}}}}}
+
+" {{{{{{{{{{{{{{{{{{{
+" Go to php method definition in the same file
+" TODO not finished yet
+nnoremap <leader>d :normal /function <cword>(<cr>
+" }}}}}}}}}}}}}}}}}}}
+
+" {{{{{{{{{{{{{{{{{{{
+" Rst plugin in the making
+" TODO For now, it adds *** between the title
+function! RstTitleTransform(titleText)
+    let textLength = strlen(a:titleText)
+    let titleMeta = repeat('*', textLength)
+
+    exe "normal! O" . titleMeta . "\<Esc>"
+    exe "normal! jo" . titleMeta . "\<Esc>k"
+endfunction
+
+nnoremap <leader>rt :<c-u>call RstTitleTransform(getline('.'))<cr>
+" }}}}}}}}}}}}}}}}}}}
+
+" {{{{{{{{{{{{{{{{{{{
+" Bug1: when the cursor is between two methods
+function! DisplayFunctionName(lineNumber)
+    let firstLine = 1
+    let currentNumber = a:lineNumber
+
+    while currentNumber > firstLine
+        let catchedLine = getline(currentNumber)
+        let currentNumber = currentNumber - 1
+
+
+        if catchedLine =~ '^ \+\(public\|private\|protected\) function '
+            let functionName = substitute(catchedLine, '^ \+\(public\|private\|protected\) function ', '', 'g')
+            echo functionName
+
+            break
+        endif
+    endwhile
+endfunction
+" }}}}}}}}}}}}}}}}}}}
+
+" {{{{{{{{{{{{{{{{{{{
+nnoremap <leader>ab :tabnext<cr>
+" }}}}}}}}}}}}}}}}}}}
+
+" {{{{{{{{{{{{{{{{{{{
+" TODO not finished yet
+function! ReverseArgsOrder()
+    let parenthesisContent = getline('.')
+endfunction
+
+" nnoremap <leader>rev :<c-u>call ReverseArgsOrder()<cr>
+nnoremap <leader>rev :<c-u>call ReverseArgsOrder()<cr>
+" }}}}}}}}}}}}}}}}}}}
+
+" {{{{{{{{{{{{{{{{{{{
+" call Scratch()
+nnoremap <leader>scr :<c-u>call Scratch()<cr>
+" }}}}}}}}}}}}}}}}}}}
