@@ -49,6 +49,10 @@ Plug 'vim-vdebug/vdebug' " Project path needs to be specified https://bit.ly/35l
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'ryanoasis/vim-devicons' " Should be loaded last
 
+" Best autocomplete tool ever
+" https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions#implemented-coc-extensions
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
 " Nice plugins
 """"""""""""""
 
