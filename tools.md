@@ -131,6 +131,8 @@ xsv
 yank
 yq
 zlib
+zsh-autosuggestions
+zsh-syntax-highlighting
 ```
 
 
