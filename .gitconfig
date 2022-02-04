@@ -1,17 +1,17 @@
 [alias]
 	st = status
-	sts = status -s
+	sts = status -s --branch
 	lgf = log --format='%C(auto)%h%d %s (%Cblue%ae%Creset)' --graph
 	co = checkout
 	br = !git --no-pager branch
 	last = !git log -1
 	ci = commit
 	difw = diff -U0 --word-diff-regex=.
-	diff = diff --color-moved
 	dif = diff -U0 --color-words=.
+	diffancy = diff-so-fancy | less --tabs=4 -RFX
 [user]
-	email = <bilou@bilou>
-	name = <bilou>
+	email = b.gasmi@24s.com
+	name = bilel gasmi
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
@@ -23,6 +23,15 @@
 	prune = true
 [rerere]
 	enabled = true
+#> With delta
+; [core]
+; 	pager = delta
+
+; [interactive]
+;     diffFilter = delta --color-only
+#< With delta
+
+# With francy
 [core]
 	pager = diff-so-fancy | less --tabs=4 -RFX
 [color]
@@ -44,7 +53,22 @@
 	changeHunkIndicators = false
 	stripLeadingSymbols = false
 	rulerWidth = 47
+#> With delta
+; [delta]
+;     ; feature = collared-trogon
+;     feature = hoopoe
+;     whitespace-error-style = 22 reverse
+;     side-by-side = true
+
+; [delta "decorations"]
+;     commit-decoration-style = bbold yellow box ui
+;     file-style = bold yellow ui
+;     file-decoration-style = none
+#< With delta
+
 [status]
 	showuntrackedfiles = all
 [diff]
 	noprefix = true
+[tag]
+	sort = -version:refname
