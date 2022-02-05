@@ -24,5 +24,6 @@ nmap <leader>af :AllFiles<cr>
 nmap <leader>b :Buffers<cr>
 nmap <leader>h :History<cr>
 nmap <leader>r :Rg<cr>
+nmap <leader>rr :exec "Rg ".expand("<cword>")<cr>
 nmap <leader>R :Rg<space>
 nmap <leader>gb :GBranches<cr>
