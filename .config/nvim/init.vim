@@ -93,119 +93,41 @@ source ~/.config/nvim/plugins/dracula.vim
 source ~/.config/nvim/plugins/coc.vim
 source ~/.config/nvim/plugins/phpactor.vim
 source ~/.config/nvim/plugins/vim-test.vim
+source ~/.config/nvim/plugins/sideways.vim
+source ~/.config/nvim/plugins/lightline.vim
+source ~/.config/nvim/plugins/vim-fetch.vim
+source ~/.config/nvim/plugins/interestingwords.vim
+source ~/.config/nvim/plugins/cucumber.vim
+source ~/.config/nvim/plugins/tabular.vim
+source ~/.config/nvim/plugins/surround.vim
+source ~/.config/nvim/plugins/repeat.vim
+source ~/.config/nvim/plugins/speeddating.vim
+source ~/.config/nvim/plugins/unimpaired.vim
+source ~/.config/nvim/plugins/commentary.vim
+source ~/.config/nvim/plugins/abolish.vim
+source ~/.config/nvim/plugins/vim-sensible.vim
+source ~/.config/nvim/plugins/syntastic.vim
+" FIXME: maybe useless ?
+" source ~/.config/nvim/plugins/polyglot.vim
+source ~/.config/nvim/plugins/basicscratch.vim
+source ~/.config/nvim/plugins/quickscope.vim
+source ~/.config/nvim/plugins/autopairs.vim
+source ~/.config/nvim/plugins/twig.vim
+source ~/.config/nvim/plugins/ansible.vim
+source ~/.config/nvim/plugins/bbye.vim
+source ~/.config/nvim/plugins/plantuml.vim
+source ~/.config/nvim/plugins/ferret.vim
+source ~/.config/nvim/plugins/signify.vim
+source ~/.config/nvim/plugins/vdebug.vim
+source ~/.config/nvim/plugins/editorconfig.vim
+source ~/.config/nvim/plugins/editorconfig.vim
+source ~/.config/nvim/plugins/mundo.vim
+source ~/.config/nvim/plugins/neomake.vim
 
-"==============================================================================
-
-Plug 'evidens/vim-twig'
-" Make vim pretty with nova-vim
-Plug 'sheerun/vim-polyglot'
-Plug 'trevordmiller/nova-vim'
-Plug 'pearofducks/ansible-vim'
-Plug 'moll/vim-bbye'
-Plug 'itchyny/lightline.vim'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-abolish'
-Plug 'tpope/vim-sensible'
-Plug 'tpope/vim-unimpaired'
-Plug 'tpope/vim-surround'
-Plug 'amiorin/vim-project'
-" Syntax highlighter
-Plug 'vim-syntastic/syntastic'
-
-" Plantuml
-Plug 'aklt/plantuml-syntax'
-
-Plug 'wincent/ferret'
-" Plug 'neomake/neomake'
-Plug 'mhinz/vim-signify'
-Plug 'honza/vim-snippets'
-Plug 'majutsushi/tagbar'
-Plug 'vim-vdebug/vdebug' " Project path needs to be specified https://bit.ly/35ll1N1
-Plug 'ryanoasis/vim-devicons' " Should be loaded last
-
-" Json with comments
-Plug 'kevinoid/vim-jsonc'
-
-" Nice plugins
-""""""""""""""
-
-Plug 'editorconfig/editorconfig-vim'
-
-" {{{
-Plug 'jiangmiao/auto-pairs'
-" }}}
-
-" {{{
-Plug 'AndrewRadev/sideways.vim'
-" }}}
-
-" {{{
-" Leverage f and F
-Plug 'unblevable/quick-scope'
-
-" Trigger a highlight in the appropriate direction when pressing these keys:
-let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
-
-" Trigger a highlight only when pressing f and F.
-let g:qs_highlight_on_keys = ['f', 'F']
-" }}}
-
-" vim-mundo history visualizer
-" Plug 'simnalamburt/vim-mundo'
-
-
-" {{{
-Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
-
-" }}}
-
-
-" {{{
-Plug 'dbeniamine/cheat.sh-vim'
-
-" }}}
-
-
-" {{{
-Plug 'cometsong/CommentFrame.vim'
-
-" }}}
-
-
-" {{{
-" vim path/to/file.txt:18:90 -> open the file on line 18 at column 90
-Plug 'wsdjeg/vim-fetch'
-
-" }}}
-
-
-" Highlight different words using different colors
-Plug 'lfv89/vim-interestingwords'
-
-" {{{
-" Alignment
-Plug 'godlygeek/tabular'
-
-" }}}
-
-" {{{
-" behat
-Plug 'tpope/vim-cucumber'
-
-" }}}
-
-" {{{
-" t o d o comments
-Plug 'Dimercel/todo-vim'
-
-" }}}
-
-" Scratch
-Plug 'bilougit/basicscratch'
-
-"==============================================================================
 call plug#end()
 doautocmd User PlugLoaded
+
+"------------------------------------------------------------------------------
 
 """""""""""""""""""""""""""""""""""""""""""
 
@@ -217,60 +139,6 @@ doautocmd User PlugLoaded
 :nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
 
 """"""""""""""""""""""""""""""""""""""""""
-
-" Plugins configurations
-" """"""""""""""""""""""
-"
-" {{{
-" }}}
-
-" Lightline.vim
-" """""""""""""
-set laststatus=2
-
-" vim-commentary
-" """"""""""""""
-" gcc to comment a line
-" gcj to comment the current and the line below
-" gc4j to comment the current and four lines below
-
-" tpope/vim-abolish
-" """"""""""""""
-" feat1
-" :%Subvert/facilit{y,ies}/building{,s}/g  does the same as the three lines below
-" :%s/facilities/buildings/g
-" :%s/Facilities/Buildings/g
-" :%s/FACILITIES/BUILDINGS/g
-"
-" feat2
-" :Abolish that makes it easier than the native :iabbrev
-"
-" feat3
-" Want to turn fooBar into foo_bar? Press crs (coerce to snake_case).
-" MixedCase (crm),
-" camelCase (crc),
-" snake_case (crs),
-" UPPER_CASE (cru),
-" dash-case (cr-),
-" dot.case (cr.),
-" space case (cr<space>),
-" and Title Case (crt) are all just 3 keystrokes away.
-" """"""""""""""
-
-" tagbar
-nmap <F8> :TagbarToggle<CR>
-
-" vim-unimpaired
-nmap ( [
-nmap ) ]
-omap ( [
-omap ) ]
-xmap ( [
-xmap ) ]
-
-""""""""""""""""""
-""""""""""""""""""
-
 " Personal
 " """"""""
 
@@ -284,13 +152,24 @@ inoremap jk <esc>:update<cr>
 " Allow gf to open non-existent files
 map gf :edit <cfile><cr>
 
-nmap <leader>k :nohlsearch<cr>
-
 " Search the selected text
 vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 
 vnoremap < <gv
 vnoremap > >gv
+
+nnoremap <leader>b :buffers<cr>:buffer<space>
+
+" {{{{{{{{{{{{{{{{{{{
+" t.ly/whw5
+nnoremap <leader>ltab :tablast<cr>
+nnoremap <leader>ftab :tabfirst<cr>
+" }}}}}}}}}}}}}}}}}}}
+
+" {{{{{{{{{{{{{{{{{{{
+nnoremap <c-j> ddp
+nnoremap <c-k> dd<esc>kP
+" }}}}}}}}}}}}}}}}}}}
 
 " Some php abbreviations
 iabbrev cls class
@@ -438,12 +317,6 @@ function! DisplayFunctionName()
         endif
     endwhile
 endfunction
-" }}}}}}}}}}}}}}}}}}}
-
-" {{{{{{{{{{{{{{{{{{{
-" t.ly/whw5
-nnoremap <leader>ltab :tablast<cr>
-nnoremap <leader>ftab :tabfirst<cr>
 " }}}}}}}}}}}}}}}}}}}
 
 " {{{{{{{{{{{{{{{{{{{
