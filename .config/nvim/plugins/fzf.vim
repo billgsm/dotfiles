@@ -21,9 +21,11 @@ nnoremap <leader>A :exec "Rg ".expand("<cword>")<cr>
 " shortcut for :GitFiles
 nmap <leader><leader> :Files<cr>
 nmap <leader>af :AllFiles<cr>
-nmap <leader>b :Buffers<cr>
+nmap <leader>B :Buffers<cr>
 nmap <leader>h :History<cr>
+
 nmap <leader>r :Rg<cr>
 nmap <leader>rr :exec "Rg ".expand("<cword>")<cr>
 nmap <leader>R :Rg<space>
+
 nmap <leader>gb :GBranches<cr>

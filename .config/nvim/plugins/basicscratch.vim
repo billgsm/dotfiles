@@ -1,0 +1,2 @@
+Plug 'bilougit/basicscratch'
+

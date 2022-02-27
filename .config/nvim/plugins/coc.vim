@@ -19,6 +19,7 @@ let g:coc_global_extensions = [
     \ 'coc-svg',
     \ 'coc-tsserver',
     \ '@yaegassy/coc-volar',
+    \ 'coc-phpactor',
 \ ]
 
 " Use tab for trigger completion with characters ahead and navigate.
