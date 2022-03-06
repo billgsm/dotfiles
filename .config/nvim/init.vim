@@ -43,7 +43,7 @@ set redrawtime=10000
 set autoindent
 
 " numbered lines
-set relativenumber
+set number relativenumber
 
 " add directories of ./ to path
 set path=.
@@ -86,6 +86,7 @@ call plug#begin(data_dir . '/plugins')
 
 source ~/.config/nvim/plugins/vim-fugitive.vim
 source ~/.config/nvim/plugins/nerdtree.vim
+" source ~/.config/nvim/plugins/nvim-tree.vim
 source ~/.config/nvim/plugins/dispatch.vim
 source ~/.config/nvim/plugins/fzf.vim
 source ~/.config/nvim/plugins/floaterm.vim
@@ -120,14 +121,25 @@ source ~/.config/nvim/plugins/ferret.vim
 source ~/.config/nvim/plugins/signify.vim
 source ~/.config/nvim/plugins/vdebug.vim
 source ~/.config/nvim/plugins/editorconfig.vim
-source ~/.config/nvim/plugins/editorconfig.vim
 source ~/.config/nvim/plugins/mundo.vim
 source ~/.config/nvim/plugins/neomake.vim
+source ~/.config/nvim/plugins/telescope.vim
+source ~/.config/nvim/plugins/splitjoin.vim
+source ~/.config/nvim/plugins/context-commentstring.vim
 
 call plug#end()
 doautocmd User PlugLoaded
 
 "------------------------------------------------------------------------------
+" Miscellaneous
+"------------------------------------------------------------------------------
+augroup FileTypeOverrides
+    autocmd!
+    " FIXME does not work 😭
+    autocmd FileType php setlocal commentstring=//%s
+    autocmd TermOpen * setlocal nospell
+augroup END
+autocmd FileType php setlocal commentstring=//\ %s
 
 """""""""""""""""""""""""""""""""""""""""""
 
@@ -144,10 +156,14 @@ doautocmd User PlugLoaded
 
 " Editing and sourcing $MYVIMRC fast
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>G
+nnoremap <leader>cv :vsplit ~/.config/nvim/coc-settings.json<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
 " Escape insert mode easier
 inoremap jk <esc>:update<cr>
+nnoremap <leader>kk :nohlsearch<cr>
+nnoremap <leader>Q :bufdo bdelete<cr>
+" inoremap ;; 
 
 " Allow gf to open non-existent files
 map gf :edit <cfile><cr>
@@ -158,7 +174,7 @@ vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 vnoremap < <gv
 vnoremap > >gv
 
-nnoremap <leader>b :buffers<cr>:buffer<space>
+" nnoremap <leader>b :buffers<cr>:buffer<space>
 
 " {{{{{{{{{{{{{{{{{{{
 " t.ly/whw5
