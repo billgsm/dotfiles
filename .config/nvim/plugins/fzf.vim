@@ -13,19 +13,9 @@ command! -bang -nargs=? -complete=dir Files
 command! -bang -nargs=? -complete=dir AllFiles
     \ call fzf#run(fzf#wrap('allfiles', fzf#vim#with_preview({ 'dir': <q-args>, 'sink': 'e', 'source': 'rg --files --hidden --no-ignore' }), <bang>0))
 
+nmap <leader><leader> :AllFiles<cr>
+
 " ripgrep
-nnoremap <leader>a :Rg<space>
-nnoremap <leader>A :exec "Rg ".expand("<cword>")<cr>
-
-
-" shortcut for :GitFiles
-nmap <leader><leader> :Files<cr>
-nmap <leader>af :AllFiles<cr>
-nmap <leader>B :Buffers<cr>
-nmap <leader>h :History<cr>
-
 nmap <leader>r :Rg<cr>
 nmap <leader>rr :exec "Rg ".expand("<cword>")<cr>
 nmap <leader>R :Rg<space>
-
-nmap <leader>gb :GBranches<cr>
