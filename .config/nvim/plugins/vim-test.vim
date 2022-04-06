@@ -8,14 +8,14 @@ nmap <silent> <leader>tv :TestVisit<CR>
 
 " {{{{{
 " PHP
-let g:test#php#phpunit#executable = 'docker-compose exec php ./vendor/bin/phpunit'
-let g:test#php#behat#executable = 'docker-compose exec php bash -c "cd tests/Functional/behat && ./vendor/bin/behat"'
+let g:test#php#phpunit#executable = 'docker-compose exec <container-name> ./vendor/bin/phpunit'
+let g:test#php#behat#executable = 'docker-compose exec <container-name> <behat-executable-binary-file>'
 " }}}}}
 
 " {{{{{
 " Python
 " let test#python#runner = 'pytest'
-" let g:test#python#pytest#executable = '/Users/bilelgasmi/Documents/projects/gittag/tutorial-env/bin/pytest'
+" let g:test#python#pytest#executable = <path-to-binary-file>
 " }}}}}
 
 " {{{{{
