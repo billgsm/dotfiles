@@ -33,6 +33,7 @@ set splitright
 
 set confirm " Avoid exiting by accident
 set exrc
+set secure
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
@@ -126,6 +127,11 @@ source ~/.config/nvim/plugins/neomake.vim
 source ~/.config/nvim/plugins/telescope.vim
 source ~/.config/nvim/plugins/splitjoin.vim
 source ~/.config/nvim/plugins/context-commentstring.vim
+source ~/.config/nvim/plugins/dockerfile.vim
+source ~/.config/nvim/plugins/asyncrun.vim
+source ~/.config/nvim/plugins/makegreen.vim
+source ~/.config/nvim/plugins/projectionist.vim
+source ~/.config/nvim/plugins/eunuch.vim
 
 call plug#end()
 doautocmd User PlugLoaded
@@ -161,9 +167,16 @@ nnoremap <leader>sv :source $MYVIMRC<cr>
 
 " Escape insert mode easier
 inoremap jk <esc>:update<cr>
+" NOTE: This makes it too complicated to navigate in visual mode
+" vnoremap jk <esc>:update<cr>
+nnoremap <leader>ss <esc>:update<cr>
+
+nnoremap ;; A;<esc>
+nnoremap ,, A,<esc>
+nnoremap <leader>dj yyp
+
 nnoremap <leader>kk :nohlsearch<cr>
 nnoremap <leader>Q :bufdo bdelete<cr>
-" inoremap ;; 
 
 " Allow gf to open non-existent files
 map gf :edit <cfile><cr>
@@ -173,6 +186,8 @@ vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 
 vnoremap < <gv
 vnoremap > >gv
+vnoremap <c-j> :m '>+1<CR>gv=gv
+vnoremap <c-k> :m '<-2<CR>gv=gv
 
 " nnoremap <leader>b :buffers<cr>:buffer<space>
 
@@ -185,6 +200,14 @@ nnoremap <leader>ftab :tabfirst<cr>
 " {{{{{{{{{{{{{{{{{{{
 nnoremap <c-j> ddp
 nnoremap <c-k> dd<esc>kP
+" Suggested by vim.fandom, it must be better 🤔
+" nnoremap <A-j> :m .+1<CR>==
+" nnoremap <A-k> :m .-2<CR>==
+" }}}}}}}}}}}}}}}}}}}
+
+" {{{{{{{{{{{{{{{{{{{
+" Remove current file
+" nnoremap <leader>rm :call delete(expand('%')) | bdelete!
 " }}}}}}}}}}}}}}}}}}}
 
 " Some php abbreviations
@@ -249,6 +272,9 @@ function! UpdateComposer(rawPackageName)
     let packageName = substitute(a:rawPackageName, '"', '', 'g')
     let packageName = split(trim(packageName), ':')[0]
 
+    " NOTE testing this
+    " FloatermNew --autoclose=0 docker-compose exec -T php composer u ' . packageName
+    " This used to work
     execute '! docker-compose exec -T php composer u ' . packageName
     " let bytecode = system('docker-compose exec php composer u ' . packageName . ' -vvv')
 endfunction

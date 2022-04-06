@@ -20,6 +20,7 @@ let g:coc_global_extensions = [
     \ 'coc-tsserver',
     \ '@yaegassy/coc-volar',
     \ 'coc-phpactor',
+    \ 'coc-pyright',
 \ ]
 
 " Use tab for trigger completion with characters ahead and navigate.
