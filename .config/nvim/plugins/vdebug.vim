@@ -25,8 +25,7 @@ let g:vdebug_options = {
 \    'debug_file_level' : 0,
 \    'debug_file' : '',
 \    'path_maps' : {
-\        '/var/www/zola-returns': getcwd(),
-\        '/var/www/zola-orders': getcwd(),
+\        <abspath-on-the-container>: getcwd(),
 \    },
 \    'watch_window_style' : 'expanded',
 \    'marker_default' : '⬦',
