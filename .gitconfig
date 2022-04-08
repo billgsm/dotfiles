@@ -10,8 +10,8 @@
 	dif = diff -U0 --color-words=.
 	diffancy = diff-so-fancy | less --tabs=4 -RFX
 [user]
-	email = b.gasmi@24s.com
-	name = bilel gasmi
+	email = <email>
+	name = <name>
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
