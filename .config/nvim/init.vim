@@ -68,6 +68,9 @@ set hls
 " reload files when they change on disk (e.g., git checkout)
 set autoread
 
+" to have the file path at the top right of the screen
+set winbar=%=%m\ %f
+
 " space keyboard is bigger than most
 let mapleader = "\<space>"
 "-----------------------------------
@@ -85,53 +88,64 @@ endif
 
 call plug#begin(data_dir . '/plugins')
 
-source ~/.config/nvim/plugins/vim-fugitive.vim
-source ~/.config/nvim/plugins/nerdtree.vim
-" source ~/.config/nvim/plugins/nvim-tree.vim
-source ~/.config/nvim/plugins/dispatch.vim
-source ~/.config/nvim/plugins/fzf.vim
-source ~/.config/nvim/plugins/floaterm.vim
-source ~/.config/nvim/plugins/dracula.vim
-source ~/.config/nvim/plugins/coc.vim
-source ~/.config/nvim/plugins/phpactor.vim
-source ~/.config/nvim/plugins/vim-test.vim
-source ~/.config/nvim/plugins/sideways.vim
-source ~/.config/nvim/plugins/lightline.vim
-source ~/.config/nvim/plugins/vim-fetch.vim
-source ~/.config/nvim/plugins/interestingwords.vim
-source ~/.config/nvim/plugins/cucumber.vim
-source ~/.config/nvim/plugins/tabular.vim
-source ~/.config/nvim/plugins/surround.vim
-source ~/.config/nvim/plugins/repeat.vim
-source ~/.config/nvim/plugins/speeddating.vim
-source ~/.config/nvim/plugins/unimpaired.vim
-source ~/.config/nvim/plugins/commentary.vim
-source ~/.config/nvim/plugins/abolish.vim
-source ~/.config/nvim/plugins/vim-sensible.vim
-source ~/.config/nvim/plugins/syntastic.vim
-" FIXME: maybe useless ?
-" source ~/.config/nvim/plugins/polyglot.vim
-source ~/.config/nvim/plugins/basicscratch.vim
-source ~/.config/nvim/plugins/quickscope.vim
-source ~/.config/nvim/plugins/autopairs.vim
-source ~/.config/nvim/plugins/twig.vim
-source ~/.config/nvim/plugins/ansible.vim
-source ~/.config/nvim/plugins/bbye.vim
-source ~/.config/nvim/plugins/plantuml.vim
-source ~/.config/nvim/plugins/ferret.vim
-source ~/.config/nvim/plugins/signify.vim
-source ~/.config/nvim/plugins/vdebug.vim
-source ~/.config/nvim/plugins/editorconfig.vim
-source ~/.config/nvim/plugins/mundo.vim
-source ~/.config/nvim/plugins/neomake.vim
-source ~/.config/nvim/plugins/telescope.vim
-source ~/.config/nvim/plugins/splitjoin.vim
-source ~/.config/nvim/plugins/context-commentstring.vim
-source ~/.config/nvim/plugins/dockerfile.vim
-source ~/.config/nvim/plugins/asyncrun.vim
-source ~/.config/nvim/plugins/makegreen.vim
-source ~/.config/nvim/plugins/projectionist.vim
-source ~/.config/nvim/plugins/eunuch.vim
+source ~/.config/nvim/plugins/vim-fugitive/vim-fugitive.vim
+source ~/.config/nvim/plugins/nerdtree/nerdtree.vim
+" source ~/.config/nvim/plugins/nvim-tree/nvim-tree.vim
+source ~/.config/nvim/plugins/dispatch/dispatch.vim
+source ~/.config/nvim/plugins/fzf/fzf.vim
+source ~/.config/nvim/plugins/floaterm/floaterm.vim
+" source ~/.config/nvim/plugins/dracula/dracula.vim
+" source ~/.config/nvim/plugins/codedark/codedark.vim
+" source ~/.config/nvim/plugins/phptheme/phptheme.vim
+" source ~/.config/nvim/plugins/janah/janah.vim
+source ~/.config/nvim/plugins/onedark/onedark.vim
+" source ~/.config/nvim/plugins/lsp/lsp.vim
+source ~/.config/nvim/plugins/coc/coc.vim
+source ~/.config/nvim/plugins/phpactor/phpactor.vim
+source ~/.config/nvim/plugins/vim-test/vim-test.vim
+source ~/.config/nvim/plugins/sideways/sideways.vim
+source ~/.config/nvim/plugins/lightline/lightline.vim
+source ~/.config/nvim/plugins/vim-fetch/vim-fetch.vim
+source ~/.config/nvim/plugins/interestingwords/interestingwords.vim
+source ~/.config/nvim/plugins/cucumber/cucumber.vim
+source ~/.config/nvim/plugins/tabular/tabular.vim
+source ~/.config/nvim/plugins/surround/surround.vim
+source ~/.config/nvim/plugins/repeat/repeat.vim
+source ~/.config/nvim/plugins/speeddating/speeddating.vim
+source ~/.config/nvim/plugins/unimpaired/unimpaired.vim
+source ~/.config/nvim/plugins/commentary/commentary.vim
+source ~/.config/nvim/plugins/abolish/abolish.vim
+source ~/.config/nvim/plugins/vim-sensible/vim-sensible.vim
+source ~/.config/nvim/plugins/syntastic/syntastic.vim
+source ~/.config/nvim/plugins/tmux/tmux.vim
+source ~/.config/nvim/plugins/vtr/vtr.vim
+source ~/.config/nvim/plugins/polyglot/polyglot.vim
+source ~/.config/nvim/plugins/basicscratch/basicscratch.vim
+source ~/.config/nvim/plugins/quickscope/quickscope.vim
+source ~/.config/nvim/plugins/autopairs/autopairs.vim
+source ~/.config/nvim/plugins/twig/twig.vim
+source ~/.config/nvim/plugins/ansible/ansible.vim
+source ~/.config/nvim/plugins/bbye/bbye.vim
+source ~/.config/nvim/plugins/plantuml/plantuml.vim
+source ~/.config/nvim/plugins/ferret/ferret.vim
+source ~/.config/nvim/plugins/signify/signify.vim
+source ~/.config/nvim/plugins/vdebug/vdebug.vim
+source ~/.config/nvim/plugins/editorconfig/editorconfig.vim
+source ~/.config/nvim/plugins/mundo/mundo.vim
+source ~/.config/nvim/plugins/neomake/neomake.vim
+source ~/.config/nvim/plugins/telescope/telescope.vim
+source ~/.config/nvim/plugins/splitjoin/splitjoin.vim
+source ~/.config/nvim/plugins/context-commentstring/context-commentstring.vim
+source ~/.config/nvim/plugins/dockerfile/dockerfile.vim
+source ~/.config/nvim/plugins/asyncrun/asyncrun.vim
+source ~/.config/nvim/plugins/makegreen/makegreen.vim
+source ~/.config/nvim/plugins/projectionist/projectionist.vim
+source ~/.config/nvim/plugins/eunuch/eunuch.vim
+source ~/.config/nvim/plugins/startify/startify.vim
+source ~/.config/nvim/plugins/obsession/obsession.vim
+source ~/.config/nvim/plugins/easymotion/easymotion.vim
+source ~/.config/nvim/plugins/rfc/rfc.vim
+source ~/.config/nvim/plugins/copilot/copilot.vim
 
 call plug#end()
 doautocmd User PlugLoaded
@@ -139,15 +153,70 @@ doautocmd User PlugLoaded
 "------------------------------------------------------------------------------
 " Miscellaneous
 "------------------------------------------------------------------------------
-augroup FileTypeOverrides
-    autocmd!
-    " FIXME does not work 😭
-    autocmd FileType php setlocal commentstring=//%s
-    autocmd TermOpen * setlocal nospell
-augroup END
-autocmd FileType php setlocal commentstring=//\ %s
 
+source ~/.config/nvim/plugins/vim-fugitive/vim-fugitive-config.vim
+source ~/.config/nvim/plugins/nerdtree/nerdtree-config.vim
+" source ~/.config/nvim/plugins/nvim-tree/nvim-tree-config.vim
+source ~/.config/nvim/plugins/dispatch/dispatch-config.vim
+source ~/.config/nvim/plugins/fzf/fzf-config.vim
+source ~/.config/nvim/plugins/floaterm/floaterm-config.vim
+" source ~/.config/nvim/plugins/dracula/dracula-config.vim
+" source ~/.config/nvim/plugins/codedark/codedark-config.vim
+" source ~/.config/nvim/plugins/phptheme/phptheme-config.vim
+" source ~/.config/nvim/plugins/janah/janah-config.vim
+source ~/.config/nvim/plugins/onedark/onedark-config.vim
+" source ~/.config/nvim/plugins/lsp/lsp-config.vim
+source ~/.config/nvim/plugins/coc/coc-config.vim
+source ~/.config/nvim/plugins/phpactor/phpactor-config.vim
+source ~/.config/nvim/plugins/vim-test/vim-test-config.vim
+source ~/.config/nvim/plugins/sideways/sideways-config.vim
+source ~/.config/nvim/plugins/lightline/lightline-config.vim
+source ~/.config/nvim/plugins/vim-fetch/vim-fetch-config.vim
+source ~/.config/nvim/plugins/interestingwords/interestingwords-config.vim
+source ~/.config/nvim/plugins/cucumber/cucumber-config.vim
+source ~/.config/nvim/plugins/tabular/tabular-config.vim
+source ~/.config/nvim/plugins/surround/surround-config.vim
+source ~/.config/nvim/plugins/repeat/repeat-config.vim
+source ~/.config/nvim/plugins/speeddating/speeddating-config.vim
+source ~/.config/nvim/plugins/unimpaired/unimpaired-config.vim
+source ~/.config/nvim/plugins/commentary/commentary-config.vim
+source ~/.config/nvim/plugins/abolish/abolish-config.vim
+source ~/.config/nvim/plugins/vim-sensible/vim-sensible-config.vim
+source ~/.config/nvim/plugins/syntastic/syntastic-config.vim
+source ~/.config/nvim/plugins/tmux/tmux-config.vim
+source ~/.config/nvim/plugins/vtr/vtr-config.vim
+source ~/.config/nvim/plugins/polyglot/polyglot-config.vim
+source ~/.config/nvim/plugins/basicscratch/basicscratch-config.vim
+source ~/.config/nvim/plugins/quickscope/quickscope-config.vim
+source ~/.config/nvim/plugins/autopairs/autopairs-config.vim
+source ~/.config/nvim/plugins/twig/twig-config.vim
+source ~/.config/nvim/plugins/ansible/ansible-config.vim
+source ~/.config/nvim/plugins/bbye/bbye-config.vim
+source ~/.config/nvim/plugins/plantuml/plantuml-config.vim
+source ~/.config/nvim/plugins/ferret/ferret-config.vim
+source ~/.config/nvim/plugins/signify/signify-config.vim
+source ~/.config/nvim/plugins/vdebug/vdebug-config.vim
+source ~/.config/nvim/plugins/editorconfig/editorconfig-config.vim
+source ~/.config/nvim/plugins/mundo/mundo-config.vim
+source ~/.config/nvim/plugins/neomake/neomake-config.vim
+source ~/.config/nvim/plugins/telescope/telescope-config.vim
+source ~/.config/nvim/plugins/splitjoin/splitjoin-config.vim
+source ~/.config/nvim/plugins/context-commentstring/context-commentstring-config.vim
+source ~/.config/nvim/plugins/dockerfile/dockerfile-config.vim
+source ~/.config/nvim/plugins/asyncrun/asyncrun-config.vim
+source ~/.config/nvim/plugins/makegreen/makegreen-config.vim
+source ~/.config/nvim/plugins/projectionist/projectionist-config.vim
+source ~/.config/nvim/plugins/eunuch/eunuch-config.vim
+source ~/.config/nvim/plugins/startify/startify-config.vim
+source ~/.config/nvim/plugins/obsession/obsession-config.vim
+source ~/.config/nvim/plugins/easymotion/easymotion-config.vim
+source ~/.config/nvim/plugins/rfc/rfc-config.vim
+source ~/.config/nvim/plugins/copilot/copilot-config.vim
 """""""""""""""""""""""""""""""""""""""""""
+
+"------------------------------------------------------------------------------
+" Well arranged customs
+"------------------------------------------------------------------------------
 
 " Replace the word under the cursor
 " Open a new command to complete with the word to substitute with
@@ -161,14 +230,13 @@ autocmd FileType php setlocal commentstring=//\ %s
 " """"""""
 
 " Editing and sourcing $MYVIMRC fast
-nnoremap <leader>ev :vsplit $MYVIMRC<cr>G
-nnoremap <leader>cv :vsplit ~/.config/nvim/coc-settings.json<cr>
+nnoremap <leader>ev :tabnew $MYVIMRC<cr>G
+nnoremap <leader>cv :tabnew ~/.config/nvim/coc-settings.json<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
 " Escape insert mode easier
 inoremap jk <esc>:update<cr>
 " NOTE: This makes it too complicated to navigate in visual mode
-" vnoremap jk <esc>:update<cr>
 nnoremap <leader>ss <esc>:update<cr>
 
 nnoremap ;; A;<esc>
@@ -189,8 +257,6 @@ vnoremap > >gv
 vnoremap <c-j> :m '>+1<CR>gv=gv
 vnoremap <c-k> :m '<-2<CR>gv=gv
 
-" nnoremap <leader>b :buffers<cr>:buffer<space>
-
 " {{{{{{{{{{{{{{{{{{{
 " t.ly/whw5
 nnoremap <leader>ltab :tablast<cr>
@@ -200,14 +266,6 @@ nnoremap <leader>ftab :tabfirst<cr>
 " {{{{{{{{{{{{{{{{{{{
 nnoremap <c-j> ddp
 nnoremap <c-k> dd<esc>kP
-" Suggested by vim.fandom, it must be better 🤔
-" nnoremap <A-j> :m .+1<CR>==
-" nnoremap <A-k> :m .-2<CR>==
-" }}}}}}}}}}}}}}}}}}}
-
-" {{{{{{{{{{{{{{{{{{{
-" Remove current file
-" nnoremap <leader>rm :call delete(expand('%')) | bdelete!
 " }}}}}}}}}}}}}}}}}}}
 
 " Some php abbreviations
@@ -386,59 +444,3 @@ endfunction
 
 nnoremap <leader>cls :call InsertPhpClassLine()<cr>
 " }}}}}}}}}}}}}}}}}}}
-
-" {{{{{{{{{{{{{{{{{{{
-" Run phpunit of the current word the cursor is on through --filter option
-" function! PhpunitRun()
-"     let word = expand("<cword>")
-
-"     while start < end
-"         let truc = s:ExtractComposerLine(getline(start))
-"         call add(packages, truc)
-
-"         let start += 1
-"     endwhile
-
-"     echo 'Updating... ' . join(packages, ' ')
-"     call UpdateComposer(join(packages, ' '))
-
-
-"     let fd_result = system('! fd ' . word . ' tests/Unit/')
-"     let size = split(fd_result, '\v\n')
-
-"     " Open a new split and set it up.
-"     split __fd_result__
-"     normal! ggdG
-"     setlocal buftype=nofile
-"     setlocal nowrap
-"     setlocal norelativenumber
-"     setlocal number
-"     nnoremap <buffer> q :q<cr>
-"     nnoremap <buffer> <silent> <cr> :execute 'tabnew '.getline('.')<cr>
-
-"     " Insert the bytecode.
-"     call append(0, size)
-
-"     setlocal readonly
-"     " Cannot work ever since you do many researches
-"     " setlocal nomodifiable
-"     normal! gg
-"     resize 10
-" endfunction
-
-" vnoremap <leader>vcom :<c-u>call VUpdateComposer(getpos("'<"), getpos("'>"))<cr>
-" }}}}}}}}}}}}}}}}}}}
-"
-" {{{{{{{{{{{{{{{{{{{
-" Template for php
-autocmd BufNewFile *.php 0r ~/.vim/templates/Skeleton.php
-
-" Template for phpunit php
-autocmd BufNewFile *Test.php 0r ~/.vim/templates/SkeletonTest.php
-
-" Template for rst
-autocmd BufNewFile *.rst 0r ~/.vim/templates/Skeleton.rst
-" }}}}}}}}}}}}}}}}}}}
-
-" Maintains undo history between sessions
-" set undofile
