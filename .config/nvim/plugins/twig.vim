@@ -1,2 +1,0 @@
-Plug 'lumiliet/vim-twig'
-
