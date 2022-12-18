@@ -1,0 +1,2 @@
+" Alignment
+Plug 'godlygeek/tabular'

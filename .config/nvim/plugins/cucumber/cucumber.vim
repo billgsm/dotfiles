@@ -1,0 +1,2 @@
+Plug 'veloce/vim-behat'
+
