@@ -1,0 +1,1 @@
+Plug 'cshuaimin/ssr.nvim'
