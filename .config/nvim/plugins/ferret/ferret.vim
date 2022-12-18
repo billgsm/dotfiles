@@ -1,0 +1,2 @@
+Plug 'wincent/ferret'
+

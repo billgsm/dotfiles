@@ -1,0 +1,1 @@
+Plug 'potamides/pantran.nvim'
