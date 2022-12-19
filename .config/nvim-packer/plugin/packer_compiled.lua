@@ -173,7 +173,7 @@ _G.packer_plugins = {
   },
   undotree = {
     loaded = true,
-    path = "/home/bilel/.local/share/nvim/site/pack/packer/start/undotree",
+    path = my_home_dir .. "/.local/share/nvim/site/pack/packer/start/undotree",
     url = "https://github.com/mbbill/undotree"
   },
   ["vim-fugitive"] = {
