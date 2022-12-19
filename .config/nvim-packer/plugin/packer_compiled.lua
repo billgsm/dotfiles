@@ -102,7 +102,7 @@ _G.packer_plugins = {
   },
   cmp_luasnip = {
     loaded = true,
-    path = "/home/bilel/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
+    path = my_home_dir .. "/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
     url = "https://github.com/saadparwaiz1/cmp_luasnip"
   },
   ["friendly-snippets"] = {
