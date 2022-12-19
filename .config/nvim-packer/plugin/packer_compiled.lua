@@ -122,7 +122,7 @@ _G.packer_plugins = {
   },
   ["mason-lspconfig.nvim"] = {
     loaded = true,
-    path = "/home/bilel/.local/share/nvim/site/pack/packer/start/mason-lspconfig.nvim",
+    path = my_home_dir .. "/.local/share/nvim/site/pack/packer/start/mason-lspconfig.nvim",
     url = "https://github.com/williamboman/mason-lspconfig.nvim"
   },
   ["mason.nvim"] = {
