@@ -168,7 +168,7 @@ _G.packer_plugins = {
   },
   ["telescope.nvim"] = {
     loaded = true,
-    path = "/home/bilel/.local/share/nvim/site/pack/packer/start/telescope.nvim",
+    path = my_home_dir .. "/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
   },
   undotree = {
