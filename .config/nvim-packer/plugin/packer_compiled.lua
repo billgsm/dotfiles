@@ -157,7 +157,7 @@ _G.packer_plugins = {
   },
   ["plenary.nvim"] = {
     loaded = true,
-    path = "/home/bilel/.local/share/nvim/site/pack/packer/start/plenary.nvim",
+    path = my_home_dir .. "/.local/share/nvim/site/pack/packer/start/plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
   },
   ["rose-pine"] = {
