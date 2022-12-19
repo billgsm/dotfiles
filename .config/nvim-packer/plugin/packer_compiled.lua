@@ -77,7 +77,7 @@ time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
   LuaSnip = {
     loaded = true,
-    path = "/home/bilel/.local/share/nvim/site/pack/packer/start/LuaSnip",
+    path = my_home_dir .. "/.local/share/nvim/site/pack/packer/start/LuaSnip",
     url = "https://github.com/L3MON4D3/LuaSnip"
   },
   ["cmp-buffer"] = {
