@@ -51,7 +51,7 @@ end
 time([[Luarocks path setup]], true)
 local my_home_dir = os.getenv("HOME")
 local package_path_str = my_home_dir .. "/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?.lua;" .. my_home_dir .. "/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?/init.lua;" .. my_home_dir .. "/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?.lua;" .. my_home_dir .. "/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?/init.lua"
-local install_cpath_pattern = "/home/bilel/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/lua/5.1/?.so"
+local install_cpath_pattern = my_home_dir .. "/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/lua/5.1/?.so"
 if not string.find(package.path, package_path_str, 1, true) then
   package.path = package.path .. ';' .. package_path_str
 end
