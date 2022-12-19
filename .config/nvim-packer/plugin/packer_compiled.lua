@@ -152,7 +152,7 @@ _G.packer_plugins = {
   },
   playground = {
     loaded = true,
-    path = "/home/bilel/.local/share/nvim/site/pack/packer/start/playground",
+    path = my_home_dir .. "/.local/share/nvim/site/pack/packer/start/playground",
     url = "https://github.com/nvim-treesitter/playground"
   },
   ["plenary.nvim"] = {
