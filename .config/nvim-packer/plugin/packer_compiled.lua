@@ -137,7 +137,7 @@ _G.packer_plugins = {
   },
   ["nvim-lspconfig"] = {
     loaded = true,
-    path = "/home/bilel/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
+    path = my_home_dir .. "/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
   },
   ["nvim-treesitter"] = {
