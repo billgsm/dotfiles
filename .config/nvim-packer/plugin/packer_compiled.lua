@@ -127,7 +127,7 @@ _G.packer_plugins = {
   },
   ["mason.nvim"] = {
     loaded = true,
-    path = "/home/bilel/.local/share/nvim/site/pack/packer/start/mason.nvim",
+    path = my_home_dir .. "/.local/share/nvim/site/pack/packer/start/mason.nvim",
     url = "https://github.com/williamboman/mason.nvim"
   },
   ["nvim-cmp"] = {
