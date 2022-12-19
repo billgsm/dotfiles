@@ -97,7 +97,7 @@ _G.packer_plugins = {
   },
   ["cmp-path"] = {
     loaded = true,
-    path = "/home/bilel/.local/share/nvim/site/pack/packer/start/cmp-path",
+    path = my_home_dir .. "/.local/share/nvim/site/pack/packer/start/cmp-path",
     url = "https://github.com/hrsh7th/cmp-path"
   },
   cmp_luasnip = {
