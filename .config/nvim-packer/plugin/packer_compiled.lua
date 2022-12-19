@@ -142,7 +142,7 @@ _G.packer_plugins = {
   },
   ["nvim-treesitter"] = {
     loaded = true,
-    path = "/home/bilel/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
+    path = my_home_dir .. "/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
   },
   ["packer.nvim"] = {
