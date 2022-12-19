@@ -147,7 +147,7 @@ _G.packer_plugins = {
   },
   ["packer.nvim"] = {
     loaded = true,
-    path = "/home/bilel/.local/share/nvim/site/pack/packer/start/packer.nvim",
+    path = my_home_dir .. "/.local/share/nvim/site/pack/packer/start/packer.nvim",
     url = "https://github.com/wbthomason/packer.nvim"
   },
   playground = {
