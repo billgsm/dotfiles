@@ -87,7 +87,7 @@ _G.packer_plugins = {
   },
   ["cmp-nvim-lsp"] = {
     loaded = true,
-    path = "/home/bilel/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp",
+    path = my_home_dir .. "/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp",
     url = "https://github.com/hrsh7th/cmp-nvim-lsp"
   },
   ["cmp-nvim-lua"] = {
